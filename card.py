@@ -9,8 +9,9 @@ class Card(arcade.Sprite):
         self._color = SUITS[suit]
         self._value = CARDS[self.card]
         self.image_file_name = f":resources:images/cards/card{self.suit}{self.card}.png"
-
+        self.is_just_left_from_mont = False
         self.is_face_up = False
+        
         super().__init__(FACE_DOWN_IMAGE, scale, hit_box_algorithm="None")
 
     def _get_hl(self):
@@ -45,5 +46,5 @@ class Card(arcade.Sprite):
         return self._value
 
     @property
-    def top_dowm(self):
+    def top_down(self):
         return self._get_hl()
