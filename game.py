@@ -1,6 +1,6 @@
 import arcade
 import random
-import colors
+from colors import *
 import constants
 from card import Card
 from piles import MontPile, TrashPile, PlacesPile, SuitsPile
@@ -13,7 +13,7 @@ class Solitare(arcade.Window):
 
         self.card_list = None
         self.hand = None
-        arcade.set_background_color(colors.PETROLEUM_BLUE)
+        arcade.set_background_color(PETROLEUM_BLUE)
         self.mont_pile = None
         self.trash_pile = None
         self.suits_piles = None
@@ -44,21 +44,25 @@ class Solitare(arcade.Window):
         for i in range(7):
             if i < 2:
                 if i == 0:
-                    pile = MontPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, colors.BABY_BLUE)
+                    pile = MontPile(
+                        constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE
+                    )
                     pile.position = (
                         constants.START_X + i * constants.X_SPACING,
                         constants.TOP_Y,
                     )
                     self.mont_pile.append(pile)
                 else:
-                    pile = TrashPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, colors.BABY_BLUE)
+                    pile = TrashPile(
+                        constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE
+                    )
                     pile.position = (
                         constants.START_X + i * constants.X_SPACING,
                         constants.TOP_Y,
                     )
                     self.trash_pile.append(pile)
             elif i != 2:
-                pile = SuitsPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, colors.BABY_BLUE)
+                pile = SuitsPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE)
                 pile.position = (
                     constants.START_X + i * constants.X_SPACING,
                     constants.TOP_Y,
@@ -66,7 +70,7 @@ class Solitare(arcade.Window):
                 self.suits_piles.append(pile)
 
         for i in range(7):
-            pile = PlacesPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, colors.BABY_BLUE)
+            pile = PlacesPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE)
             pile.position = (
                 constants.START_X + i * constants.X_SPACING,
                 constants.MIDDLE_Y,
@@ -82,7 +86,7 @@ class Solitare(arcade.Window):
                         break
             else:
                 self.mont_pile[0].cards.append(card)
-                
+
         self.piles_list = self.get_all_piles()
 
     def on_draw(self):
@@ -117,13 +121,11 @@ class Solitare(arcade.Window):
                 self.hand.add_cards(cards)
                 self.pull_to_top(cards)
 
-            
-
     def on_mouse_release(self, x: float, y: float, button: int, modifiers: int):
         if self.is_mont_clicked:
             self.is_mont_clicked = False
             self.trash_pile[0].cards[-1].is_just_left_from_mont = False
-            
+
         if not self.hand.cards:
             return
 
@@ -131,12 +133,12 @@ class Solitare(arcade.Window):
         if pile in self.places_piles:
             for card in self.hand.cards:
                 pile.add_card(card, self.current_pile)
-        
+
         reset_position = True
-            
+
         if reset_position:
-            self.hand.reset_cards()                
-        
+            self.hand.reset_cards()
+
         self.hand.clean()
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
@@ -158,7 +160,7 @@ class Solitare(arcade.Window):
         final_list.extend(self.suits_piles)
         final_list.extend(self.places_piles)
         return final_list
-    
+
     def pull_to_top(self, cards):
         if isinstance(cards, list):
             for card in cards:
@@ -167,12 +169,3 @@ class Solitare(arcade.Window):
         else:
             self.card_list.remove(cards)
             self.card_list.append(cards)
-def main():
-    """Main function"""
-    window = Solitare()
-    window.setup()
-    arcade.run()
-
-
-if __name__ == "__main__":
-    main()
