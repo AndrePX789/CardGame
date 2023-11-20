@@ -1,10 +1,10 @@
 import arcade
 import random
-from colors import *
-import constants
-from card import Card
-from piles import MontPile, TrashPile, PlacesPile, SuitsPile
-from hand import Hand
+from src.colors import *
+from src.constants import *
+from src.card import Card
+from src.piles import MontPile, TrashPile, PlacesPile, SuitsPile
+from src.hand import Hand
 
 
 class Solitare(arcade.Window):
@@ -30,10 +30,10 @@ class Solitare(arcade.Window):
         self.suits_piles = arcade.SpriteList()
         self.places_piles = arcade.SpriteList()
 
-        for suit in constants.SUITS.keys():
-            for value in constants.CARDS.keys():
-                card = Card(value, suit, constants.CARD_SCALE)
-                card.position = (constants.START_X, constants.BOTTOM_Y)
+        for suit in SUITS.keys():
+            for value in CARDS.keys():
+                card = Card(value, suit, CARD_SCALE)
+                card.position = (START_X, BOTTOM_Y)
                 self.card_list.append(card)
 
         # Shuffle the cards
@@ -44,36 +44,32 @@ class Solitare(arcade.Window):
         for i in range(7):
             if i < 2:
                 if i == 0:
-                    pile = MontPile(
-                        constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE
-                    )
+                    pile = MontPile(MAT_WIDTH, MAT_HEIGHT, BABY_BLUE)
                     pile.position = (
-                        constants.START_X + i * constants.X_SPACING,
-                        constants.TOP_Y,
+                        START_X + i * X_SPACING,
+                        TOP_Y,
                     )
                     self.mont_pile.append(pile)
                 else:
-                    pile = TrashPile(
-                        constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE
-                    )
+                    pile = TrashPile(MAT_WIDTH, MAT_HEIGHT, BABY_BLUE)
                     pile.position = (
-                        constants.START_X + i * constants.X_SPACING,
-                        constants.TOP_Y,
+                        START_X + i * X_SPACING,
+                        TOP_Y,
                     )
                     self.trash_pile.append(pile)
             elif i != 2:
-                pile = SuitsPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE)
+                pile = SuitsPile(MAT_WIDTH, MAT_HEIGHT, BABY_BLUE)
                 pile.position = (
-                    constants.START_X + i * constants.X_SPACING,
-                    constants.TOP_Y,
+                    START_X + i * X_SPACING,
+                    TOP_Y,
                 )
                 self.suits_piles.append(pile)
 
         for i in range(7):
-            pile = PlacesPile(constants.MAT_WIDTH, constants.MAT_HEIGHT, BABY_BLUE)
+            pile = PlacesPile(MAT_WIDTH, MAT_HEIGHT, BABY_BLUE)
             pile.position = (
-                constants.START_X + i * constants.X_SPACING,
-                constants.MIDDLE_Y,
+                START_X + i * X_SPACING,
+                MIDDLE_Y,
             )
             self.places_piles.append(pile)
 

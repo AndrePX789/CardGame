@@ -1,4 +1,4 @@
-from game import Solitare
+from src.game import Solitare
 import arcade
 
 

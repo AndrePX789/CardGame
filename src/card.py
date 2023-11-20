@@ -1,4 +1,4 @@
-from constants import SUITS, CARDS, FACE_DOWN_IMAGE
+from src.constants import SUITS, CARDS, FACE_DOWN_IMAGE
 import arcade
 
 

@@ -2,6 +2,7 @@ from win32api import GetSystemMetrics
 
 SCREEN_SIZE = {"width": GetSystemMetrics(0), "heigth": GetSystemMetrics(1)}
 
+
 SUITS = {"Clubs": "Black", "Spades": "Black", "Hearts": "Red", "Diamonds": "Red"}
 
 CARDS = {
@@ -22,7 +23,7 @@ CARDS = {
 
 FACE_DOWN_IMAGE = ":resources:images/cards/cardBack_red2.png"
 
-CARD_SCALE = 0.9
+CARD_SCALE = 0.7
 
 CARD = {
     "width": 140 * CARD_SCALE,

@@ -1,5 +1,5 @@
 import arcade
-import constants
+from src.constants import *
 
 TYPES_PILE = {"mont": 0, "trash": 1, "suits": 2, "places": 3}
 
@@ -36,7 +36,7 @@ class PlacesPile(BasePile):
     def adjust_position_cards(self):
         for i, card in enumerate(self.cards):
             card.position = self.position[0], self.position[1] - (
-                constants.CARD_VERTICAL_OFFSET * i
+                CARD_VERTICAL_OFFSET * i
             )
 
         self._turn_last_card()
