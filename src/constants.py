@@ -1,7 +1,8 @@
-from win32api import GetSystemMetrics
+import arcade
 
-SCREEN_SIZE = {"width": GetSystemMetrics(0), "heigth": GetSystemMetrics(1)}
+DISPLAY_SIZE = arcade.get_display_size()
 
+SCREEN_SIZE = {"width": DISPLAY_SIZE[0], "heigth": DISPLAY_SIZE[1]}
 
 SUITS = {"Clubs": "Black", "Spades": "Black", "Hearts": "Red", "Diamonds": "Red"}
 
@@ -21,22 +22,30 @@ CARDS = {
     "K": 13,
 }
 
-FACE_DOWN_IMAGE = ":resources:images/cards/cardBack_red2.png"
+FACE_DOWN_CARD = ":resources:images/cards/cardBack_red5.png"
+CARD_WIDTH = 84
+CARD_HEIGTH = 114
 
-CARD_SCALE = 0.7
+CARD_SCALE = (SCREEN_SIZE["heigth"] * 0.1) / CARD_HEIGTH
 
 CARD = {
-    "width": 140 * CARD_SCALE,
-    "heigth": 190 * CARD_SCALE,
+    "width": CARD_WIDTH * CARD_SCALE,
+    "heigth": CARD_HEIGTH * CARD_SCALE,
     "values": [x for x in CARDS.keys()],
     "suits": [x for x in SUITS.keys()],
 }
 
-MAT_PERCENT_OVERSIZE = 1.25
+
+REFRESH_SIZE = 512
+REFRESH_SCALE = CARD["heigth"] / REFRESH_SIZE
+
+
+MAT_PERCENT_OVERSIZE = 2
 MAT_HEIGHT = int(CARD["heigth"] * MAT_PERCENT_OVERSIZE)
 MAT_WIDTH = int(CARD["width"] * MAT_PERCENT_OVERSIZE)
 
-VERTICAL_MARGIN_PERCENT = 0.10
+
+VERTICAL_MARGIN_PERCENT = 0.15
 HORIZONTAL_MARGIN_PERCENT = 0.15
 
 # The Y of the bottom row (2 piles)

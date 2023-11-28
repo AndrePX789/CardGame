@@ -1,10 +1,10 @@
-from src.game import Solitare
+from src.solitaire import Solitaire
 import arcade
 
 
 def main():
     """Main function"""
-    window = Solitare()
+    window = Solitaire()
     window.setup()
     arcade.run()
 

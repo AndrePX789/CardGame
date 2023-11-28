@@ -1,5 +1,6 @@
 import arcade
 from src.constants import *
+from src.sprites.card import Card
 
 TYPES_PILE = {"mont": 0, "trash": 1, "suits": 2, "places": 3}
 
@@ -19,9 +20,12 @@ class MontPile(BasePile):
     def __init__(self, width: int, height: int, color):
         super().__init__(width, height, color)
 
-    def restart_mont(self, trash_pile: BasePile):
+    def restart_mont(self, trash_pile: "TrashPile"):
+        card: Card
         for card in trash_pile.cards:
-            self.add_card(card)
+            self.cards.append(card)
+            card.position = self.position
+            card.face_down()
 
         trash_pile.reset_trash()
 
@@ -55,7 +59,7 @@ class TrashPile(BasePile):
     def __init__(self, width: int, height: int, color):
         super().__init__(width, height, color)
 
-    def add_card(self, card: arcade.Sprite, mont_pile: BasePile):
+    def add_card(self, card: arcade.Sprite, mont_pile: MontPile):
         card.position = self.position
         return super().add_card(card, mont_pile)
 
