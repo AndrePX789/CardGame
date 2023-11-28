@@ -1,9 +1,9 @@
-from src.constants import SUITS, CARDS, FACE_DOWN_IMAGE
+from src.constants import SUITS, CARDS, FACE_DOWN_CARD
 import arcade
 
 
 class Card(arcade.Sprite):
-    def __init__(self, card, suit, scale=1) -> None:
+    def __init__(self, card: str, suit: str, scale: float = 1) -> None:
         self.card = card
         self.suit = suit
         self._color = SUITS[suit]
@@ -12,7 +12,7 @@ class Card(arcade.Sprite):
         self.is_just_left_from_mont = False
         self.is_face_up = False
 
-        super().__init__(FACE_DOWN_IMAGE, scale, hit_box_algorithm="None")
+        super().__init__(FACE_DOWN_CARD, scale, hit_box_algorithm="None")
 
     def _get_hl(self):
         if self.value == 1:
@@ -24,7 +24,7 @@ class Card(arcade.Sprite):
 
     def face_down(self):
         """Turn card face-down"""
-        self.texture = arcade.load_texture(FACE_DOWN_IMAGE)
+        self.texture = arcade.load_texture(FACE_DOWN_CARD)
         self.is_face_up = False
 
     def face_up(self):
