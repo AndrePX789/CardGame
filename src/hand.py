@@ -17,5 +17,5 @@ class Hand:
         self.old_card_positions.clear()
 
     def reset_cards(self):
-        for _ in range(len(self.cards)):
-            self.cards[0].position = self.old_card_positions[0]
+        for i in range(len(self.cards)):
+            self.cards[i].position = self.old_card_positions[i]
