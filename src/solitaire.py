@@ -19,7 +19,6 @@ class Solitaire(arcade.Window):
         self.trash_pile = None
         self.suits_piles = None
         self.places_piles = None
-        self.is_mont_clicked = False
         self.piles_list = None
         self.current_pile = None
         self.refresh = None
@@ -111,14 +110,13 @@ class Solitaire(arcade.Window):
             first_card = cards[-1]
             if isinstance(self.current_pile, MontPile):
                 first_card.face_up()
-                first_card.is_just_left_from_mont = True
-                self.is_mont_clicked = True
                 self.trash_pile.add_card(first_card, self.current_pile)
                 self._pull_to_top(first_card)
                 if len(self.mont_pile.cards) == 0:
                     self.refresh.visibility(True)
             else:
                 self.hand.add_cards(first_card)
+                self._pull_to_top(self.hand.cards)
         else:
             if isinstance(self.current_pile, MontPile):
                 self.mont_pile.restart_mont(self.trash_pile)
@@ -126,14 +124,8 @@ class Solitaire(arcade.Window):
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         for card in self.hand.cards:
-            if not card.is_just_left_from_mont:
-                card.center_x += dx
-                card.center_y += dy
-
-    def on_mouse_drag(
-        self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int
-    ):
-        self.on_mouse_motion(x, y, dx, dy)
+            card.center_x += dx
+            card.center_y += dy
 
     def on_mouse_release(self, x: int, y: int, button: int, modifiers: int):
         self.hand.clean()
