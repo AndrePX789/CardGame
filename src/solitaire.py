@@ -119,8 +119,9 @@ class Solitaire(arcade.Window):
                 self._pull_to_top(self.hand.cards)
         else:
             if isinstance(self.current_pile, MontPile):
-                self.mont_pile.restart_mont(self.trash_pile)
-                self.refresh.visibility(False)
+                if len(self.mont_pile.cards) == 0:
+                    self.mont_pile.restart_mont(self.trash_pile)
+                    self.refresh.visibility(False)
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         for card in self.hand.cards:
